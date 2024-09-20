@@ -5,6 +5,10 @@ VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticaDBDiscos", "PracticaDBDiscos\PracticaDBDiscos.csproj", "{12B627E3-D41B-46A0-AC22-29BE64934B2C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dominio", "dominio\dominio.csproj", "{D41A8D43-3970-41A7-94E0-E878915D3AE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "negocio", "negocio\negocio.csproj", "{5C061467-FBE9-4DA1-9638-B9F7C0BC85E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{12B627E3-D41B-46A0-AC22-29BE64934B2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12B627E3-D41B-46A0-AC22-29BE64934B2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12B627E3-D41B-46A0-AC22-29BE64934B2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D41A8D43-3970-41A7-94E0-E878915D3AE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D41A8D43-3970-41A7-94E0-E878915D3AE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D41A8D43-3970-41A7-94E0-E878915D3AE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D41A8D43-3970-41A7-94E0-E878915D3AE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C061467-FBE9-4DA1-9638-B9F7C0BC85E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C061467-FBE9-4DA1-9638-B9F7C0BC85E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C061467-FBE9-4DA1-9638-B9F7C0BC85E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C061467-FBE9-4DA1-9638-B9F7C0BC85E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

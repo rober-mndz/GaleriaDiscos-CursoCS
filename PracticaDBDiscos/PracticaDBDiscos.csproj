@@ -52,10 +52,6 @@
     <Compile Include="AgregarDisco.Designer.cs">
       <DependentUpon>AgregarDisco.cs</DependentUpon>
     </Compile>
-    <Compile Include="Autor.cs" />
-    <Compile Include="Disco.cs" />
-    <Compile Include="DiscoNegocio.cs" />
-    <Compile Include="Estilo.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,6 +87,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\dominio\dominio.csproj">
+      <Project>{d41a8d43-3970-41a7-94e0-e878915d3ae5}</Project>
+      <Name>dominio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\negocio\negocio.csproj">
+      <Project>{5c061467-fbe9-4da1-9638-b9f7c0bc85e1}</Project>
+      <Name>negocio</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

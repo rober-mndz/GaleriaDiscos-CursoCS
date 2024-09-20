@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PracticaDBDiscos
+namespace dominio
 {
-    internal class Autor
+    public class Autor
     {
         public int Id { get; set; }
         public string Nombre { get; set; }

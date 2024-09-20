@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PracticaDBDiscos
+namespace dominio
 {
-    internal class Disco
+    public class Disco
     {
         public string Titulo { get; set; }
         public DateTime FechaLanzamiento { get; set; }
