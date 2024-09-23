@@ -17,9 +17,9 @@ namespace PracticaDBDiscos
         // Defino un atributo en la clase form donde voy a guardar
         // la lista de objetos "Disco" que armo con la info que traigo desde
         // la DB.
-        private List<Disco> listaDisco
+        private List<Disco> listaDisco;
 
-;        public Form1()
+        public Form1()
         {
             InitializeComponent();
         }

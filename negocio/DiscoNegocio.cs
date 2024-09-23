@@ -14,31 +14,26 @@ namespace negocio
         public List<Disco> listarDiscos()
         {
             List<Disco> listDiscos = new List<Disco>();
-            SqlConnection conn = new SqlConnection();
-            SqlCommand cmd = new SqlCommand();
-            SqlDataReader dr;
+            AccesoDatos datos = new AccesoDatos();
             try
             {
-                conn.ConnectionString = "server=.\\SQLEXPRESS; database=DISCOS_DB; Integrated security=true";
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.CommandText = "SELECT Titulo, FechaLanzamiento as 'Fecha de Lanzamiento', CantidadCanciones as " +
+                datos.setQuery("SELECT Titulo, FechaLanzamiento as 'Fecha de Lanzamiento', CantidadCanciones as " +
                                     "'Cantidad de Canciones',\r\ne.Descripcion as Genero, a.Nombre as Autor, UrlImagenTapa From DISCOS, ESTILOS e, " +
-                                    "ARTISTAS a WHERE IdArtista = a.Id AND IdEstilo = e.Id";
-                cmd.Connection = conn;
-                conn.Open();
-                dr = cmd.ExecuteReader();
+                                    "ARTISTAS a WHERE IdArtista = a.Id AND IdEstilo = e.Id");
+                datos.ejecutarLectura();
+                
 
-                while (dr.Read())
+                while (datos.Reader.Read())
                 {
                     Disco Daux = new Disco();
-                    Daux.Titulo = (string)dr["Titulo"];
-                    Daux.FechaLanzamiento = (DateTime)dr["Fecha de lanzamiento"];
-                    Daux.CantCanciones = (int)dr["Cantidad de Canciones"];
+                    Daux.Titulo = (string)datos.Reader["Titulo"];
+                    Daux.FechaLanzamiento = (DateTime)datos.Reader["Fecha de lanzamiento"];
+                    Daux.CantCanciones = (int)datos.Reader["Cantidad de Canciones"];
                     Daux.Estilo = new Estilo();
-                    Daux.Estilo.Genero = (string)dr["Genero"];
+                    Daux.Estilo.Genero = (string)datos.Reader["Genero"];
                     Daux.Artista = new Autor();
-                    Daux.Artista.Nombre = (string)dr["Autor"];
-                    Daux.urlTapa = (string)dr["UrlImagenTapa"];
+                    Daux.Artista.Nombre = (string)datos.Reader["Autor"];
+                    Daux.urlTapa = (string)datos.Reader["UrlImagenTapa"];
                     listDiscos.Add(Daux);
 
                 }
@@ -51,7 +46,7 @@ namespace negocio
 
                 throw;
             }
-            finally { conn.Close(); }
+            finally { datos.cerrarConn(); }
         }
 
         public void InsertarDisco()
