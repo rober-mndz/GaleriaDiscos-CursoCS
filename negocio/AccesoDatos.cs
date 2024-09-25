@@ -44,6 +44,21 @@ namespace negocio
             }
         }
 
+        public void ejecutarAccion()
+        {
+            cmd.Connection = conn;
+            try
+            {
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
         public void cerrarConn()
         {
             if (reader != null)
@@ -52,6 +67,9 @@ namespace negocio
             conn.Close();
         }
 
-
+        public void setParameters(string nombre, object valor)
+        {
+            cmd.Parameters.AddWithValue(nombre, valor);
+        }
     }
 }

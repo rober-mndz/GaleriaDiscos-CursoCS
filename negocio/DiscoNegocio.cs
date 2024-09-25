@@ -33,7 +33,9 @@ namespace negocio
                     Daux.Estilo.Genero = (string)datos.Reader["Genero"];
                     Daux.Artista = new Autor();
                     Daux.Artista.Nombre = (string)datos.Reader["Autor"];
-                    Daux.urlTapa = (string)datos.Reader["UrlImagenTapa"];
+                    //Validar NULL de la DB
+                    if (!(datos.Reader["UrlImagenTapa"] is DBNull))
+                        Daux.urlTapa = (string)datos.Reader["UrlImagenTapa"];
                     listDiscos.Add(Daux);
 
                 }
@@ -48,28 +50,73 @@ namespace negocio
             }
             finally { datos.cerrarConn(); }
         }
-
-        public void InsertarDisco()
+        EstiloNegocio en = new EstiloNegocio();
+        AutorNegocio an = new AutorNegocio();   
+        public void InsertarDisco(Disco d, Estilo e, Autor a)
         {
-            SqlConnection conn = new SqlConnection();
-            SqlCommand cmd = new SqlCommand();
-            
+            AccesoDatos datos = new AccesoDatos();
             try
             {
-                conn.ConnectionString = "server=.\\SQLEXPRESS; database=DISCOS_DB; Integrated security=true";
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.CommandText = "";
-                cmd.Connection = conn;
-                conn.Open();
+                Estilo est = VerificarEInsercionEstilo(e);
+                Autor aut = VerificarEInsercionAutor(a);
+                
+                datos.setQuery("INSERT INTO DISCOS (Titulo, FechaLanzamiento, CantidadCanciones, UrlImagenTapa, IdEstilo, IdArtista) VALUES (@Titulo, @FechaLanzamiento, @CantCanciones, @UrlTapa, @IdEstilo, @IdArtista)");
+
+                datos.setParameters("@Titulo", d.Titulo);
+                datos.setParameters("@FechaLanzamiento", d.FechaLanzamiento);
+                datos.setParameters("@CantCanciones", d.CantCanciones);
+                datos.setParameters("@UrlTapa", d.urlTapa);
+                datos.setParameters("IdEstilo", est.Id);
+                datos.setParameters("IdArtista", aut.Id);
+
+                datos.ejecutarAccion();
+
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
-            finally { conn.Close(); }
+            finally { datos.cerrarConn(); }
         }
-        
+
+        public Estilo VerificarEInsercionEstilo(Estilo e)
+        {
+            List<Estilo> list = en.listarEstilos();
+            Estilo est = null;
+
+            foreach (Estilo es in list)
+            {
+                if (e.Genero == es.Genero)
+                {
+                    est = es;
+                    return est;
+                }
+            }
+
+            en.insertarEstilo(e);
+            return VerificarEInsercionEstilo(e);
+            
+        }
+
+        public Autor VerificarEInsercionAutor(Autor a)
+        {
+            List<Autor> list = an.listarAutores();
+            Autor aut = null;
+
+            foreach (Autor au in list)
+            {
+                if (a.Nombre == au.Nombre)
+                {
+                    aut = au;
+                    return aut;
+                }
+            }
+
+            an.insertarAutor(a);
+            return VerificarEInsercionAutor(a);
+
+        }
 
     }
 }

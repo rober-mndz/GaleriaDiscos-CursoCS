@@ -29,20 +29,20 @@
         private void InitializeComponent()
         {
             this.btnAgregar = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.txtTitulo = new System.Windows.Forms.TextBox();
+            this.txtCantCanciones = new System.Windows.Forms.TextBox();
+            this.txtUrlTapa = new System.Windows.Forms.TextBox();
+            this.dtpFechaLanzamiento = new System.Windows.Forms.DateTimePicker();
             this.lblTitulo = new System.Windows.Forms.Label();
-            this.dtpFechaLanzamiento = new System.Windows.Forms.Label();
+            this.lblFechaLanzamiento = new System.Windows.Forms.Label();
             this.lblCantCanciones = new System.Windows.Forms.Label();
             this.lblUrlTapa = new System.Windows.Forms.Label();
             this.lblEstilo = new System.Windows.Forms.Label();
             this.lblArtista = new System.Windows.Forms.Label();
             this.lblIngreseData = new System.Windows.Forms.Label();
             this.btnCancelar = new System.Windows.Forms.Button();
+            this.cbEstilo = new System.Windows.Forms.ComboBox();
+            this.cbArtista = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btnAgregar
@@ -53,48 +53,35 @@
             this.btnAgregar.TabIndex = 0;
             this.btnAgregar.Text = "Agregar Disco";
             this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
-            // textBox1
+            // txtTitulo
             // 
-            this.textBox1.Location = new System.Drawing.Point(133, 51);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(201, 20);
-            this.textBox1.TabIndex = 1;
+            this.txtTitulo.Location = new System.Drawing.Point(133, 51);
+            this.txtTitulo.Name = "txtTitulo";
+            this.txtTitulo.Size = new System.Drawing.Size(201, 20);
+            this.txtTitulo.TabIndex = 1;
             // 
-            // textBox2
+            // txtCantCanciones
             // 
-            this.textBox2.Location = new System.Drawing.Point(133, 181);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(201, 20);
-            this.textBox2.TabIndex = 2;
+            this.txtCantCanciones.Location = new System.Drawing.Point(133, 103);
+            this.txtCantCanciones.Name = "txtCantCanciones";
+            this.txtCantCanciones.Size = new System.Drawing.Size(201, 20);
+            this.txtCantCanciones.TabIndex = 3;
             // 
-            // textBox3
+            // txtUrlTapa
             // 
-            this.textBox3.Location = new System.Drawing.Point(133, 103);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(201, 20);
-            this.textBox3.TabIndex = 3;
+            this.txtUrlTapa.Location = new System.Drawing.Point(133, 129);
+            this.txtUrlTapa.Name = "txtUrlTapa";
+            this.txtUrlTapa.Size = new System.Drawing.Size(201, 20);
+            this.txtUrlTapa.TabIndex = 4;
             // 
-            // textBox4
+            // dtpFechaLanzamiento
             // 
-            this.textBox4.Location = new System.Drawing.Point(133, 129);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(201, 20);
-            this.textBox4.TabIndex = 4;
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(133, 155);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(201, 20);
-            this.textBox5.TabIndex = 5;
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(133, 77);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(201, 20);
-            this.dateTimePicker1.TabIndex = 6;
+            this.dtpFechaLanzamiento.Location = new System.Drawing.Point(133, 77);
+            this.dtpFechaLanzamiento.Name = "dtpFechaLanzamiento";
+            this.dtpFechaLanzamiento.Size = new System.Drawing.Size(201, 20);
+            this.dtpFechaLanzamiento.TabIndex = 6;
             // 
             // lblTitulo
             // 
@@ -105,14 +92,14 @@
             this.lblTitulo.TabIndex = 7;
             this.lblTitulo.Text = "Titulo:";
             // 
-            // dtpFechaLanzamiento
+            // lblFechaLanzamiento
             // 
-            this.dtpFechaLanzamiento.AutoSize = true;
-            this.dtpFechaLanzamiento.Location = new System.Drawing.Point(12, 83);
-            this.dtpFechaLanzamiento.Name = "dtpFechaLanzamiento";
-            this.dtpFechaLanzamiento.Size = new System.Drawing.Size(118, 13);
-            this.dtpFechaLanzamiento.TabIndex = 8;
-            this.dtpFechaLanzamiento.Text = "Fecha de Lanzamiento:";
+            this.lblFechaLanzamiento.AutoSize = true;
+            this.lblFechaLanzamiento.Location = new System.Drawing.Point(12, 83);
+            this.lblFechaLanzamiento.Name = "lblFechaLanzamiento";
+            this.lblFechaLanzamiento.Size = new System.Drawing.Size(118, 13);
+            this.lblFechaLanzamiento.TabIndex = 8;
+            this.lblFechaLanzamiento.Text = "Fecha de Lanzamiento:";
             // 
             // lblCantCanciones
             // 
@@ -170,31 +157,48 @@
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
+            // cbEstilo
+            // 
+            this.cbEstilo.FormattingEnabled = true;
+            this.cbEstilo.Location = new System.Drawing.Point(133, 154);
+            this.cbEstilo.Name = "cbEstilo";
+            this.cbEstilo.Size = new System.Drawing.Size(201, 21);
+            this.cbEstilo.TabIndex = 15;
+            // 
+            // cbArtista
+            // 
+            this.cbArtista.FormattingEnabled = true;
+            this.cbArtista.Location = new System.Drawing.Point(133, 181);
+            this.cbArtista.Name = "cbArtista";
+            this.cbArtista.Size = new System.Drawing.Size(201, 21);
+            this.cbArtista.TabIndex = 16;
+            // 
             // AgregarDisco
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(367, 281);
+            this.Controls.Add(this.cbArtista);
+            this.Controls.Add(this.cbEstilo);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.lblIngreseData);
             this.Controls.Add(this.lblArtista);
             this.Controls.Add(this.lblEstilo);
             this.Controls.Add(this.lblUrlTapa);
             this.Controls.Add(this.lblCantCanciones);
-            this.Controls.Add(this.dtpFechaLanzamiento);
+            this.Controls.Add(this.lblFechaLanzamiento);
             this.Controls.Add(this.lblTitulo);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.dtpFechaLanzamiento);
+            this.Controls.Add(this.txtUrlTapa);
+            this.Controls.Add(this.txtCantCanciones);
+            this.Controls.Add(this.txtTitulo);
             this.Controls.Add(this.btnAgregar);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Name = "AgregarDisco";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Agregar Disco";
+            this.Load += new System.EventHandler(this.AgregarDisco_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -203,19 +207,19 @@
         #endregion
 
         private System.Windows.Forms.Button btnAgregar;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.TextBox txtTitulo;
+        private System.Windows.Forms.TextBox txtCantCanciones;
+        private System.Windows.Forms.TextBox txtUrlTapa;
+        private System.Windows.Forms.DateTimePicker dtpFechaLanzamiento;
         private System.Windows.Forms.Label lblTitulo;
-        private System.Windows.Forms.Label dtpFechaLanzamiento;
+        private System.Windows.Forms.Label lblFechaLanzamiento;
         private System.Windows.Forms.Label lblCantCanciones;
         private System.Windows.Forms.Label lblUrlTapa;
         private System.Windows.Forms.Label lblEstilo;
         private System.Windows.Forms.Label lblArtista;
         private System.Windows.Forms.Label lblIngreseData;
         private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.ComboBox cbEstilo;
+        private System.Windows.Forms.ComboBox cbArtista;
     }
 }

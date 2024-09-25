@@ -7,7 +7,7 @@ using dominio;
 
 namespace negocio
 {
-    internal class AutorNegocio
+    public class AutorNegocio
     {
         public List<Autor> listarAutores()
         {
@@ -35,6 +35,25 @@ namespace negocio
                 throw ex;
             }
             finally { accesoDatos.cerrarConn(); }
+        }
+
+        public void insertarAutor(Autor a)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setQuery("INSERT INTO ARTISTAS VALUES (@Nombre)");
+                datos.setParameters("@Nombre", a.Nombre);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally { datos.cerrarConn(); }
+
         }
     }
 }
