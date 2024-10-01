@@ -41,7 +41,10 @@
             this.dgvDiscos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDiscos.Cursor = System.Windows.Forms.Cursors.Default;
             this.dgvDiscos.Location = new System.Drawing.Point(38, 27);
+            this.dgvDiscos.MultiSelect = false;
             this.dgvDiscos.Name = "dgvDiscos";
+            this.dgvDiscos.ReadOnly = true;
+            this.dgvDiscos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDiscos.Size = new System.Drawing.Size(593, 291);
             this.dgvDiscos.TabIndex = 0;
             this.dgvDiscos.SelectionChanged += new System.EventHandler(this.dgvDiscos_SelectionChanged);

@@ -26,20 +26,34 @@ namespace PracticaDBDiscos
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            DiscoNegocio discoNegocio = new DiscoNegocio();
 
-            //Aqui le asigno a ese atributo la lista que arme con el metodo "listarDiscos()"
-            listaDisco = discoNegocio.listarDiscos();
-            //Aca sigo haciendo lo mismo, le paso la lista al dataGridView
-            dgvDiscos.DataSource = listaDisco;
-            dgvDiscos.Columns["UrlTapa"].Visible = false;
-
-
-            // ----------------------------CARGAR IMAGEN--------------------------------
-
-            //Aca cargo en el pictureBox la url del primer objeto "Disco" de la lista "listaDisco"
-            cargarImagen(listaDisco[0].urlTapa);
+            cargar();
             
+        }
+
+        private void cargar()
+        {
+            try
+            {
+                DiscoNegocio discoNegocio = new DiscoNegocio();
+
+                //Aqui le asigno a ese atributo la lista que arme con el metodo "listarDiscos()"
+                listaDisco = discoNegocio.listarDiscos();
+                //Aca sigo haciendo lo mismo, le paso la lista al dataGridView
+                dgvDiscos.DataSource = listaDisco;
+                dgvDiscos.Columns["UrlTapa"].Visible = false;
+
+
+                // ----------------------------CARGAR IMAGEN--------------------------------
+
+                //Aca cargo en el pictureBox la url del primer objeto "Disco" de la lista "listaDisco"
+                cargarImagen(listaDisco[0].urlTapa);
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void dgvDiscos_SelectionChanged(object sender, EventArgs e)
@@ -59,7 +73,7 @@ namespace PracticaDBDiscos
             catch (Exception)
             {
 
-                pbTapa.Load("https://www.svgrepo.com/show/508699/landscape-placeholder.svg");
+                pbTapa.Load("https://www.kurin.com/wp-content/uploads/placeholder-square.jpg");
             }
         }
 
