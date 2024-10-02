@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnAgregar = new System.Windows.Forms.Button();
+            this.btnGuardar = new System.Windows.Forms.Button();
             this.txtTitulo = new System.Windows.Forms.TextBox();
             this.txtCantCanciones = new System.Windows.Forms.TextBox();
             this.txtUrlTapa = new System.Windows.Forms.TextBox();
@@ -43,17 +43,19 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.cbEstilo = new System.Windows.Forms.ComboBox();
             this.cbArtista = new System.Windows.Forms.ComboBox();
+            this.pbAgregarDisco = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pbAgregarDisco)).BeginInit();
             this.SuspendLayout();
             // 
-            // btnAgregar
+            // btnGuardar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(66, 233);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(89, 22);
-            this.btnAgregar.TabIndex = 0;
-            this.btnAgregar.Text = "Agregar Disco";
-            this.btnAgregar.UseVisualStyleBackColor = true;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            this.btnGuardar.Location = new System.Drawing.Point(66, 233);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(89, 22);
+            this.btnGuardar.TabIndex = 0;
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // txtTitulo
             // 
@@ -75,6 +77,7 @@
             this.txtUrlTapa.Name = "txtUrlTapa";
             this.txtUrlTapa.Size = new System.Drawing.Size(201, 20);
             this.txtUrlTapa.TabIndex = 4;
+            this.txtUrlTapa.Leave += new System.EventHandler(this.txtUrlTapa_Leave);
             // 
             // dtpFechaLanzamiento
             // 
@@ -141,7 +144,7 @@
             // 
             this.lblIngreseData.AutoSize = true;
             this.lblIngreseData.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIngreseData.Location = new System.Drawing.Point(10, 9);
+            this.lblIngreseData.Location = new System.Drawing.Point(128, 9);
             this.lblIngreseData.Name = "lblIngreseData";
             this.lblIngreseData.Size = new System.Drawing.Size(347, 25);
             this.lblIngreseData.TabIndex = 13;
@@ -173,12 +176,22 @@
             this.cbArtista.Size = new System.Drawing.Size(201, 21);
             this.cbArtista.TabIndex = 16;
             // 
+            // pbAgregarDisco
+            // 
+            this.pbAgregarDisco.Location = new System.Drawing.Point(382, 51);
+            this.pbAgregarDisco.Name = "pbAgregarDisco";
+            this.pbAgregarDisco.Size = new System.Drawing.Size(204, 204);
+            this.pbAgregarDisco.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbAgregarDisco.TabIndex = 17;
+            this.pbAgregarDisco.TabStop = false;
+            // 
             // AgregarDisco
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(367, 281);
+            this.ClientSize = new System.Drawing.Size(616, 280);
+            this.Controls.Add(this.pbAgregarDisco);
             this.Controls.Add(this.cbArtista);
             this.Controls.Add(this.cbEstilo);
             this.Controls.Add(this.btnCancelar);
@@ -193,12 +206,13 @@
             this.Controls.Add(this.txtUrlTapa);
             this.Controls.Add(this.txtCantCanciones);
             this.Controls.Add(this.txtTitulo);
-            this.Controls.Add(this.btnAgregar);
+            this.Controls.Add(this.btnGuardar);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Name = "AgregarDisco";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Agregar Disco";
             this.Load += new System.EventHandler(this.AgregarDisco_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pbAgregarDisco)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -206,7 +220,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnAgregar;
+        private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.TextBox txtTitulo;
         private System.Windows.Forms.TextBox txtCantCanciones;
         private System.Windows.Forms.TextBox txtUrlTapa;
@@ -221,5 +235,6 @@
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.ComboBox cbEstilo;
         private System.Windows.Forms.ComboBox cbArtista;
+        private System.Windows.Forms.PictureBox pbAgregarDisco;
     }
 }

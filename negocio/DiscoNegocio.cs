@@ -10,22 +10,25 @@ namespace negocio
 {
     public class DiscoNegocio
     {
-        
+        AccesoDatos datos = new AccesoDatos();
+        EstiloNegocio en = new EstiloNegocio();
+        AutorNegocio an = new AutorNegocio();
         public List<Disco> listarDiscos()
         {
             List<Disco> listDiscos = new List<Disco>();
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setQuery("SELECT Titulo, FechaLanzamiento as 'Fecha de Lanzamiento', CantidadCanciones as " +
-                                    "'Cantidad de Canciones',\r\ne.Descripcion as Genero, a.Nombre as Autor, UrlImagenTapa From DISCOS, ESTILOS e, " +
-                                    "ARTISTAS a WHERE IdArtista = a.Id AND IdEstilo = e.Id");
+                datos.setQuery("SELECT d.Id, Titulo, FechaLanzamiento as 'Fecha de Lanzamiento', CantidadCanciones as " +
+                                    "'Cantidad de Canciones',\r\ne.Descripcion as Genero, a.Nombre as Autor, UrlImagenTapa From DISCOS d, ESTILOS e, " +
+                                    "ARTISTAS a WHERE IdArtista = a.Id AND IdEstilo = e.Id AND d.Activo = 1");
                 datos.ejecutarLectura();
                 
 
                 while (datos.Reader.Read())
                 {
                     Disco Daux = new Disco();
+                    Daux.Id = (int)datos.Reader["id"];
                     Daux.Titulo = (string)datos.Reader["Titulo"];
                     Daux.FechaLanzamiento = (DateTime)datos.Reader["Fecha de lanzamiento"];
                     Daux.CantCanciones = (int)datos.Reader["Cantidad de Canciones"];
@@ -50,11 +53,10 @@ namespace negocio
             }
             finally { datos.cerrarConn(); }
         }
-        EstiloNegocio en = new EstiloNegocio();
-        AutorNegocio an = new AutorNegocio();   
+        
         public void InsertarDisco(Disco d, Estilo e, Autor a)
         {
-            AccesoDatos datos = new AccesoDatos();
+            
             try
             {
                 Estilo est = VerificarEInsercionEstilo(e);
@@ -76,6 +78,63 @@ namespace negocio
             {
 
                 throw ex;
+            }
+            finally { datos.cerrarConn(); }
+        }
+
+        public void ModificarDisco(Disco d, Estilo e, Autor a)
+        {
+            try
+            {
+                Estilo est = VerificarEInsercionEstilo(e);
+                Autor aut = VerificarEInsercionAutor(a);
+
+                datos.setQuery("UPDATE DISCOS SET Titulo = @Titulo, FechaLanzamiento = @FechaLanzamiento, CantidadCanciones = @CantCanciones, UrlImagenTapa= @UrlImagenTapa, IdEstilo = @IdEstilo, IdArtista=@IdArtista WHERE Id = @Id");
+                
+                datos.setParameters("@Titulo", d.Titulo);
+                datos.setParameters("@FechaLanzamiento", d.FechaLanzamiento);
+                datos.setParameters("@CantCanciones", d.CantCanciones);
+                datos.setParameters("@UrlImagenTapa", d.urlTapa);
+                datos.setParameters("@IdEstilo", est.Id);
+                datos.setParameters("@IdArtista", aut.Id);
+                datos.setParameters("@Id", d.Id);
+                
+                datos.ejecutarAccion();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally { datos.cerrarConn(); }
+        }
+
+        public void EliminarFisico(Disco d)
+        {
+            try
+            {
+                datos.setQuery("DELETE FROM DISCOS WHERE Id = @Id");
+                datos.setParameters("@Id", d.Id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void EliminarLogico(Disco d)
+        {
+            try
+            {
+                datos.setQuery("UPDATE DISCOS SET Activo = 0 WHERE Id = @Id");
+                datos.setParameters("@Id", d.Id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
             finally { datos.cerrarConn(); }
         }

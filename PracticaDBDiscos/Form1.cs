@@ -22,6 +22,7 @@ namespace PracticaDBDiscos
         public Form1()
         {
             InitializeComponent();
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -37,17 +38,29 @@ namespace PracticaDBDiscos
             {
                 DiscoNegocio discoNegocio = new DiscoNegocio();
 
-                //Aqui le asigno a ese atributo la lista que arme con el metodo "listarDiscos()"
+                //Aca le asigno a ese atributo la lista que arme con el metodo "listarDiscos()"
                 listaDisco = discoNegocio.listarDiscos();
                 //Aca sigo haciendo lo mismo, le paso la lista al dataGridView
                 dgvDiscos.DataSource = listaDisco;
                 dgvDiscos.Columns["UrlTapa"].Visible = false;
+                dgvDiscos.Columns["Id"].Visible = false;
+                dgvDiscos.Columns["FechaLanzamiento"].DefaultCellStyle.Format = "dd/MM/yyyy";
 
 
-                // ----------------------------CARGAR IMAGEN--------------------------------
+
+                // ----------------------------CARGAR DATOS POR DEFECTO--------------------------------
 
                 //Aca cargo en el pictureBox la url del primer objeto "Disco" de la lista "listaDisco"
                 cargarImagen(listaDisco[0].urlTapa);
+                lblTitulo.Text = listaDisco[0].Titulo;
+                lblArtista.Text = listaDisco[0].Artista.Nombre;
+                lblCantCanciones.Text = listaDisco[0].CantCanciones.ToString();
+                lblFechaLanzamiento.Text = listaDisco[0].FechaLanzamiento.Year.ToString();
+                lblGenero.Text = listaDisco[0].Estilo.Genero;
+                lblCantCanciones.Text = listaDisco[0].CantCanciones.ToString() + " Tracks";
+                FijarExtremoDerecho(lblGenero);
+
+                pbAdorno.Load("https://png.pngtree.com/png-vector/20231016/ourmid/pngtree-vinyl-disc-png-image_10188179.png");
             }
             catch (Exception ex)
             {
@@ -60,8 +73,13 @@ namespace PracticaDBDiscos
         {
             Disco seleccionado = (Disco)dgvDiscos.CurrentRow.DataBoundItem;
             cargarImagen(seleccionado.urlTapa);
-                
-            
+            lblTitulo.Text = seleccionado.Titulo;
+            lblArtista.Text = seleccionado.Artista.Nombre;
+            lblCantCanciones.Text = seleccionado.CantCanciones.ToString();
+            lblFechaLanzamiento.Text = seleccionado.FechaLanzamiento.Year.ToString();
+            lblGenero.Text = seleccionado.Estilo.Genero;
+            lblCantCanciones.Text = seleccionado.CantCanciones.ToString() + " Tracks";
+            FijarExtremoDerecho(lblGenero);
         }
 
         private void cargarImagen(string imagen)
@@ -81,6 +99,79 @@ namespace PracticaDBDiscos
         {
             AgregarDisco ventana = new AgregarDisco();  
             ventana.ShowDialog();
+            cargar();
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            Disco seleccionado;
+            seleccionado = (Disco)dgvDiscos.CurrentRow.DataBoundItem;
+            AgregarDisco ventana = new AgregarDisco(seleccionado);
+            ventana.ShowDialog();
+            cargar();
+        }
+
+        private void Eliminar (bool logico = true)
+        {
+            DiscoNegocio negocio = new DiscoNegocio();
+            Disco seleccionado;
+            seleccionado = (Disco)dgvDiscos.CurrentRow.DataBoundItem;
+
+            DialogResult result = MessageBox.Show("Seguro quiere eliminar el disco '" + seleccionado.Titulo + "'", "Eliminar Disco", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
+            {
+                if (logico)
+                {
+
+                    negocio.EliminarLogico(seleccionado);
+                }
+                else negocio.EliminarFisico(seleccionado);
+
+                cargar();
+            }
+            
+            
+        }
+
+        private void btnEliminarLogico_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Eliminar();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        private void btnEliminarFisico_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Eliminar(false);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        private void FijarExtremoDerecho(Label label)
+        {
+            int fixedRightPosition = 433; // Posición X del extremo derecho (ajusta según necesites)
+            label.Left = fixedRightPosition - label.Width;
+        }
+
+        private void txtFiltro_TextChanged(object sender, EventArgs e)
+        {
+            List<Disco> listaFiltrada;
+
+            listaFiltrada = listaDisco.FindAll(x => x.Titulo.ToUpper().Contains(txtFiltro.Text.ToUpper()));
+
+            dgvDiscos.DataSource = listaFiltrada;
         }
     }   
             
