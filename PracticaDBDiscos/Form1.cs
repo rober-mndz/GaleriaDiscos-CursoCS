@@ -71,15 +71,27 @@ namespace PracticaDBDiscos
 
         private void dgvDiscos_SelectionChanged(object sender, EventArgs e)
         {
-            Disco seleccionado = (Disco)dgvDiscos.CurrentRow.DataBoundItem;
-            cargarImagen(seleccionado.urlTapa);
-            lblTitulo.Text = seleccionado.Titulo;
-            lblArtista.Text = seleccionado.Artista.Nombre;
-            lblCantCanciones.Text = seleccionado.CantCanciones.ToString();
-            lblFechaLanzamiento.Text = seleccionado.FechaLanzamiento.Year.ToString();
-            lblGenero.Text = seleccionado.Estilo.Genero;
-            lblCantCanciones.Text = seleccionado.CantCanciones.ToString() + " Tracks";
-            FijarExtremoDerecho(lblGenero);
+            try
+            {
+                Disco seleccionado;
+                if (dgvDiscos.CurrentRow != null) seleccionado = (Disco)dgvDiscos.CurrentRow.DataBoundItem;
+                else return;
+
+                cargarImagen(seleccionado.urlTapa);
+                lblTitulo.Text = seleccionado.Titulo;
+                lblArtista.Text = seleccionado.Artista.Nombre;
+                lblCantCanciones.Text = seleccionado.CantCanciones.ToString();
+                lblFechaLanzamiento.Text = seleccionado.FechaLanzamiento.Year.ToString();
+                lblGenero.Text = seleccionado.Estilo.Genero;
+                lblCantCanciones.Text = seleccionado.CantCanciones.ToString() + " Tracks";
+                FijarExtremoDerecho(lblGenero);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
         }
 
         private void cargarImagen(string imagen)
@@ -115,7 +127,12 @@ namespace PracticaDBDiscos
         {
             DiscoNegocio negocio = new DiscoNegocio();
             Disco seleccionado;
-            seleccionado = (Disco)dgvDiscos.CurrentRow.DataBoundItem;
+            if (dgvDiscos.CurrentRow != null) seleccionado = (Disco)dgvDiscos.CurrentRow.DataBoundItem;
+            else
+            {
+                MessageBox.Show("Seleccione el disco a eliminar");
+                return;
+            }
 
             DialogResult result = MessageBox.Show("Seguro quiere eliminar el disco '" + seleccionado.Titulo + "'", "Eliminar Disco", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
