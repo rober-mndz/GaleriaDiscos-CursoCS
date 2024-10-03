@@ -117,10 +117,16 @@ namespace PracticaDBDiscos
         private void btnModificar_Click(object sender, EventArgs e)
         {
             Disco seleccionado;
-            seleccionado = (Disco)dgvDiscos.CurrentRow.DataBoundItem;
-            AgregarDisco ventana = new AgregarDisco(seleccionado);
-            ventana.ShowDialog();
-            cargar();
+
+            if (dgvDiscos.CurrentRow != null)
+            {
+                seleccionado = (Disco)dgvDiscos.CurrentRow.DataBoundItem;
+                AgregarDisco ventana = new AgregarDisco(seleccionado);
+                ventana.ShowDialog();
+                cargar();
+            }
+            else MessageBox.Show("No selecciono ningun disco para modificar.");
+            
         }
 
         private void Eliminar (bool logico = true)
