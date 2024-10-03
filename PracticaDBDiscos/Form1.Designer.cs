@@ -46,12 +46,13 @@
             this.txtFiltro = new System.Windows.Forms.TextBox();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.lblCampo = new System.Windows.Forms.Label();
-            this.cbCampo = new System.Windows.Forms.ComboBox();
-            this.lblCriterio = new System.Windows.Forms.Label();
-            this.cbCriterio = new System.Windows.Forms.ComboBox();
-            this.lblFiltro = new System.Windows.Forms.Label();
             this.txtFiltroAvanzado = new System.Windows.Forms.TextBox();
+            this.lblFiltro = new System.Windows.Forms.Label();
+            this.cbCriterio = new System.Windows.Forms.ComboBox();
+            this.lblCriterio = new System.Windows.Forms.Label();
+            this.cbCampo = new System.Windows.Forms.ComboBox();
+            this.lblCampo = new System.Windows.Forms.Label();
+            this.btnReiniciarBusqueda = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiscos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTapa)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAdorno)).BeginInit();
@@ -245,9 +246,11 @@
             this.btnBuscar.TabIndex = 2;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnReiniciarBusqueda);
             this.groupBox2.Controls.Add(this.txtFiltroAvanzado);
             this.groupBox2.Controls.Add(this.lblFiltro);
             this.groupBox2.Controls.Add(this.cbCriterio);
@@ -266,44 +269,13 @@
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
             // 
-            // lblCampo
+            // txtFiltroAvanzado
             // 
-            this.lblCampo.AutoSize = true;
-            this.lblCampo.Font = new System.Drawing.Font("Sitka Text", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCampo.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.lblCampo.Location = new System.Drawing.Point(12, 573);
-            this.lblCampo.Name = "lblCampo";
-            this.lblCampo.Size = new System.Drawing.Size(63, 21);
-            this.lblCampo.TabIndex = 3;
-            this.lblCampo.Text = "Campo:";
-            // 
-            // cbCampo
-            // 
-            this.cbCampo.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.cbCampo.FormattingEnabled = true;
-            this.cbCampo.Location = new System.Drawing.Point(81, 569);
-            this.cbCampo.Name = "cbCampo";
-            this.cbCampo.Size = new System.Drawing.Size(121, 29);
-            this.cbCampo.TabIndex = 4;
-            // 
-            // lblCriterio
-            // 
-            this.lblCriterio.AutoSize = true;
-            this.lblCriterio.Font = new System.Drawing.Font("Sitka Text", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCriterio.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.lblCriterio.Location = new System.Drawing.Point(208, 573);
-            this.lblCriterio.Name = "lblCriterio";
-            this.lblCriterio.Size = new System.Drawing.Size(71, 21);
-            this.lblCriterio.TabIndex = 5;
-            this.lblCriterio.Text = "Criterio:";
-            // 
-            // cbCriterio
-            // 
-            this.cbCriterio.FormattingEnabled = true;
-            this.cbCriterio.Location = new System.Drawing.Point(285, 569);
-            this.cbCriterio.Name = "cbCriterio";
-            this.cbCriterio.Size = new System.Drawing.Size(121, 29);
-            this.cbCriterio.TabIndex = 6;
+            this.txtFiltroAvanzado.Font = new System.Drawing.Font("Sitka Text", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFiltroAvanzado.Location = new System.Drawing.Point(482, 572);
+            this.txtFiltroAvanzado.Name = "txtFiltroAvanzado";
+            this.txtFiltroAvanzado.Size = new System.Drawing.Size(106, 24);
+            this.txtFiltroAvanzado.TabIndex = 8;
             // 
             // lblFiltro
             // 
@@ -316,13 +288,61 @@
             this.lblFiltro.TabIndex = 7;
             this.lblFiltro.Text = "Filtro:";
             // 
-            // txtFiltroAvanzado
+            // cbCriterio
             // 
-            this.txtFiltroAvanzado.Font = new System.Drawing.Font("Sitka Text", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFiltroAvanzado.Location = new System.Drawing.Point(482, 571);
-            this.txtFiltroAvanzado.Name = "txtFiltroAvanzado";
-            this.txtFiltroAvanzado.Size = new System.Drawing.Size(106, 24);
-            this.txtFiltroAvanzado.TabIndex = 8;
+            this.cbCriterio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCriterio.Font = new System.Drawing.Font("Sitka Text", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbCriterio.FormattingEnabled = true;
+            this.cbCriterio.Location = new System.Drawing.Point(285, 572);
+            this.cbCriterio.Name = "cbCriterio";
+            this.cbCriterio.Size = new System.Drawing.Size(121, 27);
+            this.cbCriterio.TabIndex = 6;
+            // 
+            // lblCriterio
+            // 
+            this.lblCriterio.AutoSize = true;
+            this.lblCriterio.Font = new System.Drawing.Font("Sitka Text", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCriterio.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.lblCriterio.Location = new System.Drawing.Point(208, 573);
+            this.lblCriterio.Name = "lblCriterio";
+            this.lblCriterio.Size = new System.Drawing.Size(71, 21);
+            this.lblCriterio.TabIndex = 5;
+            this.lblCriterio.Text = "Criterio:";
+            // 
+            // cbCampo
+            // 
+            this.cbCampo.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.cbCampo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCampo.Font = new System.Drawing.Font("Sitka Text", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbCampo.FormattingEnabled = true;
+            this.cbCampo.IntegralHeight = false;
+            this.cbCampo.Location = new System.Drawing.Point(81, 572);
+            this.cbCampo.Name = "cbCampo";
+            this.cbCampo.Size = new System.Drawing.Size(121, 27);
+            this.cbCampo.TabIndex = 4;
+            this.cbCampo.SelectedIndexChanged += new System.EventHandler(this.cbCampo_SelectedIndexChanged);
+            // 
+            // lblCampo
+            // 
+            this.lblCampo.AutoSize = true;
+            this.lblCampo.Font = new System.Drawing.Font("Sitka Text", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCampo.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.lblCampo.Location = new System.Drawing.Point(12, 573);
+            this.lblCampo.Name = "lblCampo";
+            this.lblCampo.Size = new System.Drawing.Size(63, 21);
+            this.lblCampo.TabIndex = 3;
+            this.lblCampo.Text = "Campo:";
+            // 
+            // btnReiniciarBusqueda
+            // 
+            this.btnReiniciarBusqueda.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReiniciarBusqueda.Location = new System.Drawing.Point(579, 40);
+            this.btnReiniciarBusqueda.Name = "btnReiniciarBusqueda";
+            this.btnReiniciarBusqueda.Size = new System.Drawing.Size(110, 23);
+            this.btnReiniciarBusqueda.TabIndex = 9;
+            this.btnReiniciarBusqueda.Text = "Limpiar Filtros";
+            this.btnReiniciarBusqueda.UseVisualStyleBackColor = true;
+            this.btnReiniciarBusqueda.Click += new System.EventHandler(this.btnReiniciarBusqueda_Click);
             // 
             // Form1
             // 
@@ -338,6 +358,8 @@
             this.Controls.Add(this.lblTituloApp);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
+            this.MaximumSize = new System.Drawing.Size(1196, 800);
+            this.MinimumSize = new System.Drawing.Size(1196, 800);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Galeria de Discos";
@@ -380,6 +402,7 @@
         private System.Windows.Forms.Label lblCriterio;
         private System.Windows.Forms.ComboBox cbCampo;
         private System.Windows.Forms.Label lblCampo;
+        private System.Windows.Forms.Button btnReiniciarBusqueda;
     }
 }
 

@@ -29,7 +29,9 @@ namespace PracticaDBDiscos
         {
 
             cargar();
-            
+            cbCampo.Items.Add("Artista");
+            cbCampo.Items.Add("Cantidad de Canciones");
+            cbCampo.Items.Add("Estilo");
         }
 
         private void cargar()
@@ -195,6 +197,59 @@ namespace PracticaDBDiscos
             listaFiltrada = listaDisco.FindAll(x => x.Titulo.ToUpper().Contains(txtFiltro.Text.ToUpper()));
 
             dgvDiscos.DataSource = listaFiltrada;
+        }
+
+        private void cbCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string opcion = cbCampo.SelectedItem.ToString();
+
+            if (opcion == "Cantidad de Canciones")
+            {
+                cbCriterio.Items.Clear();
+                cbCriterio.Items.Add("Mas De");
+                cbCriterio.Items.Add("Menos De");
+                cbCriterio.Items.Add("Igual A");
+            }
+            else
+            {
+                cbCriterio.Items.Clear();
+                cbCriterio.Items.Add("Comienza Con");
+                cbCriterio.Items.Add("Termina Con");
+                cbCriterio.Items.Add("Contiene");
+            }
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            DiscoNegocio negocio = new DiscoNegocio();
+            try
+            {
+                string campo = cbCampo.SelectedItem.ToString();
+                string criterio = cbCriterio.SelectedItem.ToString();
+                var filtro = txtFiltroAvanzado.Text;
+                if (campo == "Cantidad de Canciones")
+                    int.Parse(filtro);
+                else filtro.ToUpper();
+
+
+
+                dgvDiscos.DataSource = negocio.Filtrar(campo, criterio, filtro);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
+        }
+
+        private void btnReiniciarBusqueda_Click(object sender, EventArgs e)
+        {
+            txtFiltro.Text = "";
+            txtFiltroAvanzado.Text = "";
+            cargar();
+
         }
     }   
             
