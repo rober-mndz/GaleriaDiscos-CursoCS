@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using dominio;
 using negocio;
+using System.Configuration;
 namespace PracticaDBDiscos
 {
     public partial class AgregarDisco : Form
@@ -152,5 +154,18 @@ namespace PracticaDBDiscos
             }
         }
 
+        private void btnAgregarImagen_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog archivo = new OpenFileDialog();
+            archivo.Filter = "jpg|*.jpg";
+            if (archivo.ShowDialog() == DialogResult.OK)
+            {
+                txtUrlTapa.Text = archivo.FileName;
+                cargarImagen(archivo.FileName);
+
+                //guardar la imagen!!
+                File.Copy(archivo.FileName, ConfigurationManager.AppSettings["gdImages"] + archivo.SafeFileName);
+            }
+        }
     }
 }

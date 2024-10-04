@@ -349,7 +349,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(1180, 761);
+            this.ClientSize = new System.Drawing.Size(1180, 763);
             this.Controls.Add(this.btnEliminarFisico);
             this.Controls.Add(this.btnEliminarLogico);
             this.Controls.Add(this.btnModificar);
@@ -358,8 +358,8 @@
             this.Controls.Add(this.lblTituloApp);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
-            this.MaximumSize = new System.Drawing.Size(1196, 800);
-            this.MinimumSize = new System.Drawing.Size(1196, 800);
+            this.MaximumSize = new System.Drawing.Size(1196, 802);
+            this.MinimumSize = new System.Drawing.Size(1196, 0);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Galeria de Discos";
