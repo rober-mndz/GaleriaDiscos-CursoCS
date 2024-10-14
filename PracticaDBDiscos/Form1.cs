@@ -224,24 +224,27 @@ namespace PracticaDBDiscos
             DiscoNegocio negocio = new DiscoNegocio();
             try
             {
-                string campo = cbCampo.SelectedItem.ToString();
-                string criterio = cbCriterio.SelectedItem.ToString();
-                var filtro = txtFiltroAvanzado.Text;
-                if (campo == "Cantidad de Canciones")
-                    int.Parse(filtro);
-                else filtro.ToUpper();
+                if (cbCriterio.SelectedItem != null && Helper.ValidarCampoVacio(txtFiltroAvanzado.Text))
+                {
+                    string campo = cbCampo.SelectedItem.ToString();
+                    string criterio = cbCriterio.SelectedItem.ToString();
+                    var filtro = txtFiltroAvanzado.Text;
 
+                    if (campo == "Cantidad de Canciones" && Helper.ValidarCampoNumero(filtro))
+                    {
+                        int.Parse(filtro);
+                    }
 
-
-                dgvDiscos.DataSource = negocio.Filtrar(campo, criterio, filtro);
-
+                    negocio.Filtrar(campo, criterio, filtro);
+                }
+                else MessageBox.Show("Asegurese de rellenar los campos de la busqueda", "Error al Buscar");
+                
             }
             catch (Exception)
             {
 
                 throw;
             }
-            
         }
 
         private void btnReiniciarBusqueda_Click(object sender, EventArgs e)
@@ -251,6 +254,7 @@ namespace PracticaDBDiscos
             cargar();
 
         }
+
     }   
             
 }

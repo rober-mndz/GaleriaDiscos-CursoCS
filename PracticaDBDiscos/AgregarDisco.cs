@@ -16,11 +16,14 @@ namespace PracticaDBDiscos
     public partial class AgregarDisco : Form
     {
         private Disco disco = null;
+        private OpenFileDialog archivo = null;
+        
 
         public AgregarDisco()
         {
             InitializeComponent();
         }
+
         public AgregarDisco(Disco e)
         {
             InitializeComponent();
@@ -93,8 +96,12 @@ namespace PracticaDBDiscos
 
                 negocio.InsertarDisco(disc, est, aut);
                 MessageBox.Show("Agregado Exitosamente");
-                Close();
 
+                if (archivo != null && !(txtUrlTapa.Text.Contains("http")))
+                    //guardar la imagen!!
+                    File.Copy(archivo.FileName, ConfigurationManager.AppSettings["gdImages"] + archivo.SafeFileName);
+
+                Close();
             }
             catch (Exception ex)
             {
@@ -156,15 +163,14 @@ namespace PracticaDBDiscos
 
         private void btnAgregarImagen_Click(object sender, EventArgs e)
         {
-            OpenFileDialog archivo = new OpenFileDialog();
-            archivo.Filter = "jpg|*.jpg";
+            archivo = new OpenFileDialog();
+            archivo.Filter = "jpg|*.jpg|png|*.png";
             if (archivo.ShowDialog() == DialogResult.OK)
             {
                 txtUrlTapa.Text = archivo.FileName;
                 cargarImagen(archivo.FileName);
 
-                //guardar la imagen!!
-                File.Copy(archivo.FileName, ConfigurationManager.AppSettings["gdImages"] + archivo.SafeFileName);
+                
             }
         }
     }
